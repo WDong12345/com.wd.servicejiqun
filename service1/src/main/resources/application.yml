@@ -1,0 +1,43 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://peer1:1010/eureka/,http://peer2:1011/eureka/,http://peer3:1012/eureka/
+  instance:
+    prefer-ip-address: true
+  server:
+    enable-self-preservation: false #关闭自我保护警告o
+spring:
+  profiles:
+    active: peer1
+  application:
+    name: eureka-peer
+---
+#peer1第一个Eureka
+spring:
+  profiles: peer1
+server:
+  port: 1010  #端口
+eureka:
+  instance:
+    hostname: peer1  #主机
+    instance-id: eureka-peer1:1010
+---
+#peer2第二个Eureka
+spring:
+  profiles: peer2
+server:
+  port: 1011  #端口
+eureka:
+  instance:
+    hostname: peer2  #主机
+    instance-id: eureka-peer2:1011
+---
+#peer3第三个Eureka
+spring:
+  profiles: peer3
+server:
+  port: 1012  #端口
+eureka:
+  instance:
+    hostname: peer3 #主机
+    instance-id: eureka-peer3:1012
